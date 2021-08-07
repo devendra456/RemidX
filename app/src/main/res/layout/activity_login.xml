@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animLogin"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/login_anim" />
+
+    <TextView
+        android:id="@+id/mobiletext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login Here"
+        android:textAlignment="center"
+        android:textColor="@color/color3"
+        android:textSize="26sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/animLogin"
+        android:gravity="center_horizontal" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filledTextField"
+        app:layout_constraintTop_toBottomOf="@id/mobiletext"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Enter User Name"
+        app:boxStrokeColor="@color/color3"
+        app:boxStrokeErrorColor="@color/color3"
+        app:helperTextTextColor="@color/color3"
+        app:hintTextColor="@color/color3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:outlineSpotShadowColor="@color/color3"
+        app:counterOverflowTextColor="@color/color3"
+        android:layout_marginLeft="20dp">
+        <!--this is the actual edit text which takes the input-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text"
+            android:inputType="text"
+            android:maxLength="10"
+            android:maxEms="10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filledTextPassword"
+        app:layout_constraintTop_toBottomOf="@id/filledTextField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Enter Password"
+        app:boxStrokeColor="@color/color3"
+        app:boxStrokeErrorColor="@color/color3"
+        app:helperTextTextColor="@color/color3"
+        app:hintTextColor="@color/color3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        android:outlineSpotShadowColor="@color/color3"
+        app:counterOverflowTextColor="@color/color3"
+        android:layout_marginLeft="20dp">
+        <!--this is the actual edit text which takes the input-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editPass"
+            android:inputType="textPassword"
+            android:maxLength="10"
+            android:maxEms="10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/getOtpCard"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/color3"
+        android:text="Login"
+        android:textAllCaps="false"
+        android:onClick="gotoVerifyOtp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filledTextPassword">
+    </com.google.android.material.button.MaterialButton>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
