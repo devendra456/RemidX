@@ -54,10 +54,8 @@ public class VehicleFragment extends Fragment {
 
     private void setAddVehicleFragment() {
         addVehicleLayout.setSelected(true);
-        Toast.makeText(getContext(), "replaced", Toast.LENGTH_SHORT).show();
         FragmentManager fragmentTransaction=getActivity().getSupportFragmentManager();
         fragmentTransaction.beginTransaction().add(R.id.vehicleDetailsFrameLayout, new AddVehicleFragment(),"home").commit();
-        Toast.makeText(getContext(), ""+fragmentTransaction.getBackStackEntryCount(), Toast.LENGTH_SHORT).show();
 
     }
 }

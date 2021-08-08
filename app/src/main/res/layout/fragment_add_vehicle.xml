@@ -11,7 +11,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
@@ -21,33 +21,39 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vehicle Number"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/vehicleNumber"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:inputType="text" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Insurance_From_Date"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/Layout_Insurance_From_Date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/Insurance_From_Date"
+                    android:enabled="false"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:inputType="text" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="2dp"
-                    android:src="@drawable/ic_baseline_calendar_today_24"/>
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
 
             </LinearLayout>
 
@@ -56,23 +62,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Insurance_To_Date"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/Layout_Insurance_To_Date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/Insurance_To_Date"
+                    android:enabled="false"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:inputType="text" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="2dp"
-                    android:src="@drawable/ic_baseline_calendar_today_24"/>
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
 
             </LinearLayout>
 
@@ -81,23 +91,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fitness_From_Date"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/Layout_Fitness_From_Date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/Fitness_From_Date"
+                    android:enabled="false"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:inputType="text" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="2dp"
-                    android:src="@drawable/ic_baseline_calendar_today_24"/>
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
 
             </LinearLayout>
 
@@ -106,23 +120,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fitness_To_Date"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/Layout_Fitness_To_Date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/Fitness_To_Date"
+                    android:enabled="false"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:inputType="text" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="2dp"
-                    android:src="@drawable/ic_baseline_calendar_today_24"/>
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
 
             </LinearLayout>
 
@@ -131,23 +149,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Permit_State_FromDate"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/Layout_Permit_State_FromDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/Permit_State_FromDate"
+                    android:enabled="false"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:inputType="text" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="2dp"
-                    android:src="@drawable/ic_baseline_calendar_today_24"/>
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
 
             </LinearLayout>
 
@@ -156,23 +178,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Permit_State_ToDate"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/Layout_Permit_State_ToDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/Permit_State_ToDate"
+                    android:enabled="false"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:inputType="text" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="2dp"
-                    android:src="@drawable/ic_baseline_calendar_today_24"/>
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
 
             </LinearLayout>
 
@@ -181,23 +207,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Permit_Globel_FromDate"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/Layout_Permit_Globel_FromDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/Permit_Globel_FromDate"
+                    android:enabled="false"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:inputType="text" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="2dp"
-                    android:src="@drawable/ic_baseline_calendar_today_24"/>
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
 
             </LinearLayout>
 
@@ -206,23 +236,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Permit_Globel_ToDate"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/Layout_Permit_Globel_ToDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/Permit_Globel_ToDate"
+                    android:enabled="false"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:inputType="text" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="2dp"
-                    android:src="@drawable/ic_baseline_calendar_today_24"/>
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
 
             </LinearLayout>
 
@@ -231,23 +265,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tax_From"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/Layout_Tax_From"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/Tax_From"
+                    android:enabled="false"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:inputType="text" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="2dp"
-                    android:src="@drawable/ic_baseline_calendar_today_24"/>
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
 
             </LinearLayout>
 
@@ -256,23 +294,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tax_to"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/Layout_Tax_to"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/Tax_to"
+                    android:enabled="false"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:inputType="text" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="2dp"
-                    android:src="@drawable/ic_baseline_calendar_today_24"/>
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
 
             </LinearLayout>
 
@@ -281,23 +323,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="PUC_From"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/Layout_PUC_From"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/PUC_From"
+                    android:enabled="false"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:inputType="text" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="2dp"
-                    android:src="@drawable/ic_baseline_calendar_today_24"/>
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
 
             </LinearLayout>
 
@@ -306,23 +352,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="PUC_To"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/Layout_PUC_To"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/PUC_To"
+                    android:enabled="false"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:inputType="text" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="2dp"
-                    android:src="@drawable/ic_baseline_calendar_today_24"/>
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
 
             </LinearLayout>
 
@@ -330,38 +380,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Whicle_OwnerName"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/Whicle_OwnerName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:inputType="text" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mobile"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/Mobile"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:inputType="text" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="InsuranceCompany"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <Button
+                android:id="@+id/InsuranceCompany"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Submit"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:text="Submit" />
 
         </LinearLayout>
 
