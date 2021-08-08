@@ -1,6 +1,7 @@
 package com.skyview.remidx.network_request;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -15,7 +16,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class RetrofitConnection {
 
     private static final String baseUrl="http://reminderappforbansal.onevisit.in/Apis/";
-
+    ProgressBarDialog dialog;
      public static RetrofitConnection getInstance(){
          RetrofitConnection retrofitConnection=null;
          if(retrofitConnection==null){
@@ -35,9 +36,11 @@ public class RetrofitConnection {
      }
 
      public void callApiResponse(Context context, Call<String> call,CallBackRetrofit callBackRetrofit,String action){
+         dialog=new ProgressBarDialog(context);
          call.enqueue(new Callback<String>() {
              @Override
              public void onResponse(Call<String> call, Response<String> response) {
+                 dialog.show();
                  try {
                      callBackRetrofit.resposeResult(response.body(), true,action);
                  } catch (JSONException e) {
@@ -47,11 +50,8 @@ public class RetrofitConnection {
 
              @Override
              public void onFailure(Call<String> call, Throwable t) {
-                 try {
-                     callBackRetrofit.resposeResult(t.getMessage(), true,action);
-                 } catch (JSONException e) {
-                     e.printStackTrace();
-                 }
+                 dialog.hide();
+                 Toast.makeText(context, ""+t.getMessage(), Toast.LENGTH_LONG).show();
              }
          });
      }

@@ -5,9 +5,9 @@
         android:state_selected="true">
         <shape>
             <corners
-                android:radius="22dp"/>
+                android:radius="0dp"/>
             <solid
-                android:color="#20FF7F50"/>
+                android:color="@color/color4"/>
         </shape>
     </item>
 
@@ -15,9 +15,9 @@
         android:state_selected="false">
         <shape>
             <corners
-                android:radius="22dp"/>
+                android:radius="0dp"/>
             <solid
-                android:color="#00FF7F50"/>
+                android:color="#DCD8D8"/>
         </shape>
     </item>
 

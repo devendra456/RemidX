@@ -3,8 +3,10 @@ package com.skyview.remidx.model_class;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 @SuppressWarnings("unused")
-public class DriverModel {
+public class DriverModel implements Serializable {
 
     @SerializedName("AadharNo")
     private Object mAadharNo;

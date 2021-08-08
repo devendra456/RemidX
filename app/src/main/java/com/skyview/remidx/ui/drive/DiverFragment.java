@@ -1,9 +1,11 @@
 package com.skyview.remidx.ui.drive;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.skyview.remidx.R;
 import com.skyview.remidx.databinding.FragmentDriversBinding;
 import com.skyview.remidx.model_class.DataModel;
 import com.skyview.remidx.model_class.DriverModel;
@@ -38,10 +41,10 @@ public class DiverFragment extends Fragment implements RetrofitConnection.CallBa
 
     private DriverViewModel driverViewModel;
     private FragmentDriversBinding binding;
-    private RecyclerView recyclerDriver;
     RetrofitConnection connection=RetrofitConnection.getInstance();
     private String allDrives="AllDrivers";
     private List<DriverModel> driverModelList;
+    LinearLayout driverlistlayout,editdriverlayout;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,12 +53,39 @@ public class DiverFragment extends Fragment implements RetrofitConnection.CallBa
 
         binding = FragmentDriversBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        driverlistlayout=binding.DriverListLayout;
+        editdriverlayout=binding.EditDriverLayout;
+        driverlistlayout.setSelected(true);
 
-        recyclerDriver=binding.recyclerDriver;
         //get All Drive list
         getAllDriveList();
 
+        switchTab();
+
         return root;
+    }
+
+    private void switchTab() {
+        driverlistlayout.setOnClickListener(View ->{
+            driverlistlayout.setSelected(true);
+            editdriverlayout.setSelected(false);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.driverFragement, new DrivesList(driverModelList)).commit();
+        });
+
+        editdriverlayout.setOnClickListener(View ->{
+            driverlistlayout.setSelected(false);
+            editdriverlayout.setSelected(true);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.driverFragement, new EdiDriversFragement())
+                    .commit();
+        });
+    }
+
+    private void setFragement() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .add(R.id.driverFragement, new DrivesList(driverModelList))
+                .commit();
     }
 
     private void getAllDriveList() {
@@ -78,9 +108,10 @@ public class DiverFragment extends Fragment implements RetrofitConnection.CallBa
             JSONArray jsonArray=jsonObject.getJSONArray("data");
             driverModelList=new ArrayList<>();
             Type type=new TypeToken<ArrayList<DriverModel>>(){}.getType();
-            driverModelList=new Gson().fromJson(jsonArray.toString(), type);
-
+            driverModelList.addAll(new Gson().fromJson(jsonArray.toString(), type));
+            Log.d("size", String.valueOf(driverModelList.size()));
+            //Toast.makeText(getContext(),driverModelList.size(),Toast.LENGTH_LONG).show();
+            setFragement();
         }
-        Toast.makeText(getContext(),driverModelList.get(5).getDriverName(),Toast.LENGTH_LONG).show();
     }
 }
