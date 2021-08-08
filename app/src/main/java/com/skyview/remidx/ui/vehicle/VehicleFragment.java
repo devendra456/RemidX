@@ -5,36 +5,59 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.skyview.remidx.R;
-import com.skyview.remidx.databinding.FragmentVehicalBinding;
+import com.skyview.remidx.ui.vehicle.fragments.AddVehicleFragment;
+import com.skyview.remidx.ui.vehicle.fragments.VehicleListFragment;
 
 public class VehicleFragment extends Fragment {
+
+    private LinearLayout addVehicleLayout;
+    private LinearLayout vehicleListLayout;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_vehical,container,false);
-        LinearLayout addVehicleLayout=view.findViewById(R.id.addVehicleLayout);
-        LinearLayout vehicleListLayout=view.findViewById(R.id.vehicleListLayout);
+        View view = inflater.inflate(R.layout.fragment_vehical, container, false);
+        addVehicleLayout = view.findViewById(R.id.addVehicleLayout);
+        vehicleListLayout = view.findViewById(R.id.vehicleListLayout);
+        setAddVehicleFragment();
+        switchTabs();
+        return view;
+    }
 
-        addVehicleLayout.setSelected(true);
-
+    private void switchTabs() {
         addVehicleLayout.setOnClickListener(v -> {
             vehicleListLayout.setSelected(false);
             addVehicleLayout.setSelected(true);
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.vehicleDetailsFrameLayout,
+                            new AddVehicleFragment()).commit();
         });
         vehicleListLayout.setOnClickListener(v -> {
             vehicleListLayout.setSelected(true);
             addVehicleLayout.setSelected(false);
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.vehicleDetailsFrameLayout,
+                            new VehicleListFragment()).commit();
         });
-        return view;
+    }
+
+    private void setAddVehicleFragment() {
+        addVehicleLayout.setSelected(true);
+        Toast.makeText(getContext(), "replaced", Toast.LENGTH_SHORT).show();
+        FragmentManager fragmentTransaction=getActivity().getSupportFragmentManager();
+        fragmentTransaction.beginTransaction().add(R.id.vehicleDetailsFrameLayout, new AddVehicleFragment(),"home").commit();
+        Toast.makeText(getContext(), ""+fragmentTransaction.getBackStackEntryCount(), Toast.LENGTH_SHORT).show();
+
     }
 }
