@@ -22,7 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_margin="0dp"
+            android:layout_margin="8dp"
             android:layout_weight="1"
             android:background="@drawable/runded_background"
             android:orientation="horizontal">
@@ -31,9 +31,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="0dp"
                 android:text="@string/driver_list"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 android:textColor="@color/black" />
 
         </LinearLayout>
@@ -43,7 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_margin="0dp"
+            android:layout_margin="8dp"
             android:layout_weight="1"
             android:background="@drawable/runded_background"
             android:orientation="horizontal">
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="0dp"
                 android:text="@string/driver_edit"
                 android:textSize="18dp"
                 android:textColor="@color/black"

@@ -11,7 +11,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            app:cardCornerRadius="50dp"
+            app:cardCornerRadius="100dp"
             android:id="@+id/imageCard"
             app:cardElevation="0dp"
             android:layout_marginStart="5dp"
@@ -61,13 +61,13 @@
             app:layout_constraintTop_toBottomOf="@id/driving_liecence"
             />
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
+            android:id="@+id/cardViewdelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ripple_effect"
             app:layout_constraintBottom_toBottomOf="parent"
 
-            app:layout_constraintStart_toStartOf="@id/cardViewdelete"
+            app:layout_constraintStart_toStartOf="@id/cardView2"
             app:contentPadding="4dp"
             app:cardCornerRadius="24dp"
             android:layout_marginBottom="10dp">
@@ -81,7 +81,7 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewdelete"
+            android:id="@+id/cardView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
