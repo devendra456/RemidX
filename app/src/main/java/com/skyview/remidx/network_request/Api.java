@@ -44,4 +44,20 @@ public interface Api {
     Call<String> deleteData(
             @Field("id") String id
     );
+
+    @FormUrlEncoded
+    @POST("DriverAdd")
+    Call<String> addDriver(@Field("name") String name,
+                           @Field("phone") String mobile,
+                           @Field("address") String address,
+                           @Field("aadhar") String aadhar,
+                           @Field("pancard") String pancard,
+                           @Field("dl_no") String dl_no,
+                           @Field("dob") String dob,
+                           @Field("valid_date") String valid_date
+                           );
+
+    @FormUrlEncoded
+    @POST("DriverDelete")
+    Call<String> deleteDriver(@Field("id") String id);
 }
