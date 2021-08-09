@@ -27,7 +27,7 @@ import java.util.List;
 
 import retrofit2.Call;
 
-public class VehicleListFragment extends Fragment implements RetrofitConnection.CallBackRetrofit {
+public class VehicleListFragment extends Fragment implements RetrofitConnection.CallBackRetrofit, VehicleListAdapter.VehcalClickListner {
 
     private RecyclerView vehicleRecyclerView;
     private ArrayList<DetailsModel> detailsModelArrayList=new ArrayList<>();
@@ -67,7 +67,16 @@ public class VehicleListFragment extends Fragment implements RetrofitConnection.
 
     private void setDataOnRecyclerView() {
         vehicleRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        VehicleListAdapter vehicleListAdapter=new VehicleListAdapter(getContext(),detailsModelArrayList);
+        VehicleListAdapter vehicleListAdapter=new VehicleListAdapter(getContext(),detailsModelArrayList,this);
         vehicleRecyclerView.setAdapter(vehicleListAdapter);
+    }
+
+    @Override
+    public void OnSelectedVehical(DetailsModel detailsModel) {
+
+        AddVehicleFragment addVehicleFragment=new AddVehicleFragment(detailsModel);
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.vehicleDetailsFrameLayout,addVehicleFragment).commit();
     }
 }

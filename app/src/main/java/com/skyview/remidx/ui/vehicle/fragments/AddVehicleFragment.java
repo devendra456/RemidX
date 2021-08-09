@@ -17,9 +17,11 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.skyview.remidx.R;
+import com.skyview.remidx.model_class.DetailsModel;
 import com.skyview.remidx.network_request.RetrofitConnection;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import retrofit2.Call;
 
@@ -56,6 +58,16 @@ public class AddVehicleFragment extends Fragment implements View.OnClickListener
     private LinearLayout Layout_PUC_To;
 
     private Button submitButton;
+
+    private DetailsModel detailsModel;
+
+    public AddVehicleFragment(DetailsModel detailsModel) {
+        this.detailsModel = detailsModel;
+    }
+
+    public AddVehicleFragment() {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -108,6 +120,26 @@ public class AddVehicleFragment extends Fragment implements View.OnClickListener
         Layout_PUC_From.setOnClickListener(this::onClick);
         Layout_PUC_To.setOnClickListener(this::onClick);
         submitButton.setOnClickListener(this::onClick);
+
+        if (detailsModel != null) {
+            VehicleNumber.setText(detailsModel.getWhicleNum());
+            Insurance_From_Date.setText(detailsModel.getInsuranceFromDate());
+            Insurance_To_Date.setText(detailsModel.getInsuranceToDate());
+            Fitness_From_Date.setText(detailsModel.getFitnessFromDate());
+            Fitness_To_Date.setText(detailsModel.getFitnessToDate());
+            Permit_State_FromDate.setText(detailsModel.getPermitStateFromDate());
+            Permit_State_ToDate.setText(detailsModel.getPermitStateToDate());
+            Permit_Globel_FromDate.setText(String.valueOf(detailsModel.getPermitGlobelFromDate()));
+            Permit_Globel_ToDate.setText(String.valueOf(detailsModel.getPermitGlobelToDate()));
+            Tax_From.setText(detailsModel.getTaxFrom());
+            Tax_to.setText(detailsModel.getTaxTo());
+            PUC_From.setText(detailsModel.getPUCFrom());
+            PUC_To.setText(detailsModel.getPUCTo());
+            Whicle_OwnerName.setText(detailsModel.getWhicleOwnerName());
+            Mobile.setText(detailsModel.getMobile());
+            InsuranceCompany.setText(detailsModel.getInsuranceCompany());
+        }
+
         return view;
     }
 
@@ -136,7 +168,8 @@ public class AddVehicleFragment extends Fragment implements View.OnClickListener
                 datePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
                     @Override
                     public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        String date = year + "-" + monthOfYear + "-" + dayOfMonth;
+                        //String date = dayOfMonth + "-" + monthOfYear + "-" + year;
+                        String date = dayOfMonth + "-" + monthOfYear + "-" + year;
                         switch (id) {
                             case R.id.Layout_Insurance_From_Date:
                                 Insurance_From_Date.setText(date);
@@ -183,7 +216,7 @@ public class AddVehicleFragment extends Fragment implements View.OnClickListener
 
         if (id == R.id.submit) {
             if (
-                            !TextUtils.isEmpty(VehicleNumber.getText()) &&
+                    !TextUtils.isEmpty(VehicleNumber.getText()) &&
                             !TextUtils.isEmpty(Insurance_From_Date.getText()) &&
                             !TextUtils.isEmpty(Insurance_To_Date.getText()) &&
                             !TextUtils.isEmpty(Fitness_From_Date.getText()) &&
@@ -198,10 +231,11 @@ public class AddVehicleFragment extends Fragment implements View.OnClickListener
                             !TextUtils.isEmpty(PUC_To.getText()) &&
                             !TextUtils.isEmpty(Whicle_OwnerName.getText()) &&
                             !TextUtils.isEmpty(Mobile.getText()) &&
-                            !TextUtils.isEmpty(InsuranceCompany.getText())
+                            !TextUtils.isEmpty(InsuranceCompany.getText()) &&
+                            detailsModel == null
             ) {
-                RetrofitConnection retrofitConnection=RetrofitConnection.getInstance();
-                Call<String> call=retrofitConnection.getApiClient().addVehicle(
+                RetrofitConnection retrofitConnection = RetrofitConnection.getInstance();
+                Call<String> call = retrofitConnection.getApiClient().addVehicle(
                         Whicle_OwnerName.getText().toString(),
                         VehicleNumber.getText().toString(),
                         Mobile.getText().toString(),
@@ -218,10 +252,11 @@ public class AddVehicleFragment extends Fragment implements View.OnClickListener
                         Tax_to.getText().toString(),
                         Fitness_From_Date.getText().toString(),
                         Fitness_To_Date.getText().toString()
-                        );
-                retrofitConnection.callApiResponse(getContext(),call,this,"ADD_VEHICLE");
-            }
-            else {
+                );
+                retrofitConnection.callApiResponse(getContext(), call, this, "ADD_VEHICLE");
+            } else if(detailsModel!=null){
+
+            }else {
                 Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
             }
         }
@@ -229,23 +264,26 @@ public class AddVehicleFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void resposeResult(String s, Boolean b, String action) throws JSONException {
-        Log.d("resposeResult", "resposeResult: "+s);
-        Toast.makeText(getContext(), "Record added successfully", Toast.LENGTH_SHORT).show();
-       /* VehicleNumber.setText("");
-        Insurance_From_Date.setText("");
-        Insurance_To_Date.setText("");
-        Fitness_From_Date.setText("");
-        Fitness_To_Date.setText("");
-        Permit_State_FromDate.setText("");
-        Permit_State_ToDate.setText("");
-        Permit_Globel_FromDate.setText("");
-        Permit_Globel_ToDate.setText("");
-        Tax_From.setText("");
-        Tax_to.setText("");
-        PUC_From.setText("");
-        PUC_To.setText("");
-        Whicle_OwnerName.setText("");
-        Mobile.setText("");
-        InsuranceCompany.setText("");*/
+        Log.d("resposeResult", "resposeResult: " + s);
+        JSONObject jsonObject = new JSONObject(s);
+        if (jsonObject.getString("status").equals("success")) {
+            Toast.makeText(getContext(), "Record added successfully", Toast.LENGTH_SHORT).show();
+            VehicleNumber.setText("");
+            Insurance_From_Date.setText("");
+            Insurance_To_Date.setText("");
+            Fitness_From_Date.setText("");
+            Fitness_To_Date.setText("");
+            Permit_State_FromDate.setText("");
+            Permit_State_ToDate.setText("");
+            Permit_Globel_FromDate.setText("");
+            Permit_Globel_ToDate.setText("");
+            Tax_From.setText("");
+            Tax_to.setText("");
+            PUC_From.setText("");
+            PUC_To.setText("");
+            Whicle_OwnerName.setText("");
+            Mobile.setText("");
+            InsuranceCompany.setText("");
+        }
     }
 }

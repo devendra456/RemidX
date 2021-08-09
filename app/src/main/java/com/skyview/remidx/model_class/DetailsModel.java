@@ -2,8 +2,11 @@
 package com.skyview.remidx.model_class;
 
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
 @SuppressWarnings("unused")
-public class DetailsModel {
+public class DetailsModel implements Serializable {
     @SerializedName("CreatedBy")
     private String mCreatedBy;
     @SerializedName("Createdon")

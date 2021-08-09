@@ -8,6 +8,8 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 
 public interface Api {
@@ -33,7 +35,7 @@ public interface Api {
             @Field("puc_to_date") String puc_to_date,
             @Field("tax_fr_date") String tax_fr_date,
             @Field("tax_to_date") String tax_to_date,
-            @Field("fitness_from ") String fitness_from,
+            @Field("fitness_from") String fitness_from,
             @Field("fitness_to") String fitness_to
     );
 

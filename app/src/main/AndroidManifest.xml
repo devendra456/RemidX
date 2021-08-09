@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RemidX"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SingleDriverDetails"></activity>
+        <activity
+            android:name=".VehicleDetailsActivity"
+            android:exported="true" />
+        <activity android:name=".SingleDriverDetails" />
         <activity
             android:name=".HomePage"
             android:label="@string/title_activity_home_page"
@@ -23,7 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashScreen"></activity>
+        <activity android:name=".SplashScreen" />
         <activity android:name=".LoginActivity" />
     </application>
 
