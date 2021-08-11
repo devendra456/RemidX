@@ -255,7 +255,27 @@ public class AddVehicleFragment extends Fragment implements View.OnClickListener
                 );
                 retrofitConnection.callApiResponse(getContext(), call, this, "ADD_VEHICLE");
             } else if(detailsModel!=null){
-
+                RetrofitConnection retrofitConnection = RetrofitConnection.getInstance();
+                Call<String> call = retrofitConnection.getApiClient().editVehicle(
+                        detailsModel.getID(),
+                        Whicle_OwnerName.getText().toString(),
+                        VehicleNumber.getText().toString(),
+                        Mobile.getText().toString(),
+                        InsuranceCompany.getText().toString(),
+                        Insurance_From_Date.getText().toString(),
+                        Insurance_To_Date.getText().toString(),
+                        Permit_Globel_FromDate.getText().toString(),
+                        Permit_Globel_ToDate.getText().toString(),
+                        Permit_State_FromDate.getText().toString(),
+                        Permit_State_ToDate.getText().toString(),
+                        PUC_From.getText().toString(),
+                        PUC_To.getText().toString(),
+                        Tax_From.getText().toString(),
+                        Tax_to.getText().toString(),
+                        Fitness_From_Date.getText().toString(),
+                        Fitness_To_Date.getText().toString()
+                );
+                retrofitConnection.callApiResponse(getContext(), call, this, "ADD_VEHICLE");
             }else {
                 Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
             }

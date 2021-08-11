@@ -60,4 +60,26 @@ public interface Api {
     @FormUrlEncoded
     @POST("DriverDelete")
     Call<String> deleteDriver(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("VechileEdit")
+    Call<String> editVehicle(
+            @Field("id") Integer id,
+            @Field("ownername") String ownername,
+            @Field("vehiclenumber") String vehiclenumber,
+            @Field("mobileno") String mobileno,
+            @Field("insurancecompany") String insurancecompany,
+            @Field("insu_fr_date") String insu_fr_date,
+            @Field("insu_to_date") String insu_to_date,
+            @Field("permit_gl_fr_date") String permit_gl_fr_date,
+            @Field("permit_gl_to_date") String permit_gl_to_date,
+            @Field("permit_st_fr_date") String permit_st_fr_date,
+            @Field("permit_st_to_date") String permit_st_to_date,
+            @Field("puc_fr_date") String puc_fr_date,
+            @Field("puc_to_date") String puc_to_date,
+            @Field("tax_fr_date") String tax_fr_date,
+            @Field("tax_to_date") String tax_to_date,
+            @Field("fitness_from") String fitness_from,
+            @Field("fitness_to") String fitness_to
+    );
 }
