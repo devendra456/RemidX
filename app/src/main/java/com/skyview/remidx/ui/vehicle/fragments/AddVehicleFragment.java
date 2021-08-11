@@ -315,6 +315,10 @@ public class AddVehicleFragment extends Fragment implements View.OnClickListener
 
         if(action.equals("EDIT_VEHICLE")){
             Log.d("EditresposeResult", "resposeResult: "+s);
+            JSONObject jsonObject = new JSONObject(s);
+            if(jsonObject.getString("status").equals("success")){
+                Toast.makeText(getContext(), "Updated successfully", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
