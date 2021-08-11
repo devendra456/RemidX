@@ -38,6 +38,8 @@ import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -92,6 +94,20 @@ public class HomeFragment extends Fragment implements RetrofitConnection.CallBac
                 switch (tab.getPosition()){
                     case 0:
                     {
+                        Collections.sort(insurencModelList, new Comparator<DataModel>() {
+                            @Override
+                            public int compare(DataModel dataModel, DataModel t1) {
+                               /* int days1=Integer.parseInt(dataModel.getRemainDays());
+                                int days2=Integer.parseInt(t1.getRemainDays());
+                                if (days1>days2){
+                                 return days2;
+                                }
+                                else {
+                                    return days1;
+                                }*/
+                                return Integer.valueOf(dataModel.getRemainDays()).compareTo(Integer.parseInt(t1.getRemainDays()));
+                            }
+                        });
                         TruckdetailsAdpter adpter=new TruckdetailsAdpter(insurencModelList);
                         recyclerView.setAdapter(adpter);
                     }

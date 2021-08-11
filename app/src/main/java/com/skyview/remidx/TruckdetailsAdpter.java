@@ -36,23 +36,25 @@ public class TruckdetailsAdpter extends RecyclerView.Adapter<TruckdetailsAdpter.
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull MyViewHolder holder, int position) {
-
         DataModel model=list.get(position);
-        holder.truckNumber.setText(model.getTruckNumber());
         int days=Integer.parseInt(model.getRemainDays());
-        holder.leftDaysText.setText(model.getRemainDays());
-        holder.expiryDate.setText(model.getExpiryOn());
-        if(days<10){
-            holder.leftDaysText.setText(""+days+" Days Left");
-            holder.leftDaysText.setBackgroundResource(R.drawable.red_bg);
+        if (days<0){
+
         }
-        else if(days>10&&days<30){
-            holder.leftDaysText.setText(""+days+" Days Left");
-            holder.leftDaysText.setBackgroundResource(R.drawable.yellow_bg);
-        }
-        else{
-            holder.leftDaysText.setText(""+days+" Days Left");
-            holder.leftDaysText.setBackgroundResource(R.drawable.green_bg);
+        else {
+            holder.truckNumber.setText(model.getTruckNumber());
+            holder.leftDaysText.setText(model.getRemainDays());
+            holder.expiryDate.setText(model.getExpiryOn());
+            if (days < 10) {
+                holder.leftDaysText.setText("" + days + " Days Left");
+                holder.leftDaysText.setBackgroundResource(R.drawable.red_bg);
+            } else if (days > 10 && days < 30) {
+                holder.leftDaysText.setText("" + days + " Days Left");
+                holder.leftDaysText.setBackgroundResource(R.drawable.yellow_bg);
+            } else {
+                holder.leftDaysText.setText("" + days + " Days Left");
+                holder.leftDaysText.setBackgroundResource(R.drawable.green_bg);
+            }
         }
     }
 
