@@ -62,9 +62,9 @@ public interface Api {
     Call<String> deleteDriver(@Field("id") String id);
 
     @FormUrlEncoded
-    @POST("VechileEdit")
+    @POST("VechileEditPost")
     Call<String> editVehicle(
-            @Field("id") Integer id,
+            @Field("ID") Integer id,
             @Field("ownername") String ownername,
             @Field("vehiclenumber") String vehiclenumber,
             @Field("mobileno") String mobileno,
