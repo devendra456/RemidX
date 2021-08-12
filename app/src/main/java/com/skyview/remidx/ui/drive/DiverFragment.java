@@ -37,7 +37,7 @@ import kotlin.jvm.internal.TypeReference;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 
-public class DiverFragment extends Fragment implements RetrofitConnection.CallBackRetrofit {
+public class DiverFragment extends Fragment {
 
     private DriverViewModel driverViewModel;
     private FragmentDriversBinding binding;
@@ -58,7 +58,7 @@ public class DiverFragment extends Fragment implements RetrofitConnection.CallBa
         driverlistlayout.setSelected(true);
 
         //get All Drive list
-        getAllDriveList();
+        setFragement();
 
         switchTab();
 
@@ -88,18 +88,18 @@ public class DiverFragment extends Fragment implements RetrofitConnection.CallBa
                 .commit();
     }
 
-    private void getAllDriveList() {
+  /*  private void getAllDriveList() {
         Call call=connection.getApiClient().getDrivers();
         connection.callApiResponse(getContext(), call, this, allDrives);
     }
-
+*/
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
 
-    @Override
+ /*   @Override
     public void resposeResult(String s, Boolean b, String action) throws JSONException {
         if (action.equals(allDrives)){
             JSONObject jsonObject=new JSONObject(s);
@@ -113,5 +113,5 @@ public class DiverFragment extends Fragment implements RetrofitConnection.CallBa
             //Toast.makeText(getContext(),driverModelList.size(),Toast.LENGTH_LONG).show();
             setFragement();
         }
-    }
+    }*/
 }

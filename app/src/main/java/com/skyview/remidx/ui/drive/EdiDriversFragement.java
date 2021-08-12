@@ -62,7 +62,10 @@ public class EdiDriversFragement extends Fragment implements RetrofitConnection.
         }
         addButton.setOnClickListener(View ->{
             if(isValid()){
-                addDriverData();
+                if (dataModel==null)
+                    addDriverData();
+                else
+                    ediDriver();
             }
             else {
                 Toast.makeText(getContext(), "Please fill all details", Toast.LENGTH_SHORT).show();
@@ -99,6 +102,20 @@ public class EdiDriversFragement extends Fragment implements RetrofitConnection.
             }
         });
         return v;
+    }
+
+    private void ediDriver() {
+        Call<String> call=connection.getApiClient().editdriver(
+                dataModel.getID().toString(),
+                edit_name.getText().toString(),
+                edit_mobile.getText().toString(),
+                edit_Address.getText().toString(),
+                edit_adharNo.getText().toString(),
+                edit_pan_id.getText().toString(),
+                edit_licence.getText().toString(),
+                edit_dob.getText().toString(),
+                edit_dl_validity.getText().toString());
+        connection.callApiResponse(getContext(), call, this, "editDriver");
     }
 
     private void setValue(View v) {
@@ -187,13 +204,26 @@ public class EdiDriversFragement extends Fragment implements RetrofitConnection.
     public void resposeResult(String s, Boolean b, String action) throws JSONException {
         Log.d("addded", ""+s);
         if (s!=null){
-            JSONObject jsonObject=new JSONObject(s);
-            if (jsonObject.getString("status").equals("success")){
-                Toast.makeText(getContext(), jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
+            if(action.equals("adddriver")){
+                JSONObject jsonObject=new JSONObject(s);
+                if (jsonObject.getString("status").equals("success")){
+                    Toast.makeText(getContext(), jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getContext(), jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                }
             }
             else {
-                Toast.makeText(getContext(), jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                JSONObject jsonObject=new JSONObject(s);
+                Log.d("editDrive", s);
+                if (jsonObject.getString("status").equals("success")){
+                    Toast.makeText(getContext(), jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getContext(), jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                }
             }
+
         }
     }
 }

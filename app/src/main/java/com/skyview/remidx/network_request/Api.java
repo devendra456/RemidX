@@ -82,4 +82,18 @@ public interface Api {
             @Field("fitness_from") String fitness_from,
             @Field("fitness_to") String fitness_to
     );
+
+    @FormUrlEncoded
+    @POST("DriverEditPost")
+    Call<String> editdriver(
+                            @Field("id") String id,
+                            @Field("name") String name,
+                           @Field("phone") String mobile,
+                           @Field("address") String address,
+                           @Field("aadhar") String aadhar,
+                           @Field("pancard") String pancard,
+                           @Field("dl_no") String dl_no,
+                           @Field("dob") String dob,
+                           @Field("valid_date") String valid_date
+    );
 }
