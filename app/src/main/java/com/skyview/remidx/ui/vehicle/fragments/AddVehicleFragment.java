@@ -231,52 +231,56 @@ public class AddVehicleFragment extends Fragment implements View.OnClickListener
                             !TextUtils.isEmpty(PUC_To.getText()) &&
                             !TextUtils.isEmpty(Whicle_OwnerName.getText()) &&
                             !TextUtils.isEmpty(Mobile.getText()) &&
-                            !TextUtils.isEmpty(InsuranceCompany.getText()) &&
-                            detailsModel == null
+                            !TextUtils.isEmpty(InsuranceCompany.getText())
             ) {
-                RetrofitConnection retrofitConnection = RetrofitConnection.getInstance();
-                Call<String> call = retrofitConnection.getApiClient().addVehicle(
-                        Whicle_OwnerName.getText().toString(),
-                        VehicleNumber.getText().toString(),
-                        Mobile.getText().toString(),
-                        InsuranceCompany.getText().toString(),
-                        Insurance_From_Date.getText().toString(),
-                        Insurance_To_Date.getText().toString(),
-                        Permit_Globel_FromDate.getText().toString(),
-                        Permit_Globel_ToDate.getText().toString(),
-                        Permit_State_FromDate.getText().toString(),
-                        Permit_State_ToDate.getText().toString(),
-                        PUC_From.getText().toString(),
-                        PUC_To.getText().toString(),
-                        Tax_From.getText().toString(),
-                        Tax_to.getText().toString(),
-                        Fitness_From_Date.getText().toString(),
-                        Fitness_To_Date.getText().toString()
-                );
-                retrofitConnection.callApiResponse(getContext(), call, this, "ADD_VEHICLE");
-            } /*else if(detailsModel!=null){
-                RetrofitConnection retrofitConnection = RetrofitConnection.getInstance();
-                Call<String> call = retrofitConnection.getApiClient().editVehicle(
-                        detailsModel.getID(),
-                        Whicle_OwnerName.getText().toString(),
-                        VehicleNumber.getText().toString(),
-                        Mobile.getText().toString(),
-                        InsuranceCompany.getText().toString(),
-                        Insurance_From_Date.getText().toString(),
-                        Insurance_To_Date.getText().toString(),
-                        Permit_Globel_FromDate.getText().toString(),
-                        Permit_Globel_ToDate.getText().toString(),
-                        Permit_State_FromDate.getText().toString(),
-                        Permit_State_ToDate.getText().toString(),
-                        PUC_From.getText().toString(),
-                        PUC_To.getText().toString(),
-                        Tax_From.getText().toString(),
-                        Tax_to.getText().toString(),
-                        Fitness_From_Date.getText().toString(),
-                        Fitness_To_Date.getText().toString()
-                );
-                retrofitConnection.callApiResponse(getContext(), call, this, "ADD_VEHICLE");
-            }*/else {
+
+                if(detailsModel==null){
+                    RetrofitConnection retrofitConnection = RetrofitConnection.getInstance();
+                    Call<String> call = retrofitConnection.getApiClient().addVehicle(
+                            Whicle_OwnerName.getText().toString(),
+                            VehicleNumber.getText().toString(),
+                            Mobile.getText().toString(),
+                            InsuranceCompany.getText().toString(),
+                            Insurance_From_Date.getText().toString(),
+                            Insurance_To_Date.getText().toString(),
+                            Permit_Globel_FromDate.getText().toString(),
+                            Permit_Globel_ToDate.getText().toString(),
+                            Permit_State_FromDate.getText().toString(),
+                            Permit_State_ToDate.getText().toString(),
+                            PUC_From.getText().toString(),
+                            PUC_To.getText().toString(),
+                            Tax_From.getText().toString(),
+                            Tax_to.getText().toString(),
+                            Fitness_From_Date.getText().toString(),
+                            Fitness_To_Date.getText().toString()
+                    );
+                    retrofitConnection.callApiResponse(getContext(), call, this, "ADD_VEHICLE");
+                }
+                else {
+                    RetrofitConnection retrofitConnection = RetrofitConnection.getInstance();
+                    Call<String> call = retrofitConnection.getApiClient().editVehicle(
+                            Integer.parseInt(detailsModel.getID().toString()),
+                            Whicle_OwnerName.getText().toString(),
+                            VehicleNumber.getText().toString(),
+                            Mobile.getText().toString(),
+                            InsuranceCompany.getText().toString(),
+                            Insurance_From_Date.getText().toString(),
+                            Insurance_To_Date.getText().toString(),
+                            Permit_Globel_FromDate.getText().toString(),
+                            Permit_Globel_ToDate.getText().toString(),
+                            Permit_State_FromDate.getText().toString(),
+                            Permit_State_ToDate.getText().toString(),
+                            PUC_From.getText().toString(),
+                            PUC_To.getText().toString(),
+                            Tax_From.getText().toString(),
+                            Tax_to.getText().toString(),
+                            Fitness_From_Date.getText().toString(),
+                            Fitness_To_Date.getText().toString()
+                    );
+                    retrofitConnection.callApiResponse(getContext(), call, this, "EDIT_VEHICLE");
+                }
+
+            } else {
                 Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
             }
         }
@@ -284,26 +288,37 @@ public class AddVehicleFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void resposeResult(String s, Boolean b, String action) throws JSONException {
-        Log.d("resposeResult", "resposeResult: " + s);
-        JSONObject jsonObject = new JSONObject(s);
-        if (jsonObject.getString("status").equals("success")) {
-            Toast.makeText(getContext(), "Record added successfully", Toast.LENGTH_SHORT).show();
-            VehicleNumber.setText("");
-            Insurance_From_Date.setText("");
-            Insurance_To_Date.setText("");
-            Fitness_From_Date.setText("");
-            Fitness_To_Date.setText("");
-            Permit_State_FromDate.setText("");
-            Permit_State_ToDate.setText("");
-            Permit_Globel_FromDate.setText("");
-            Permit_Globel_ToDate.setText("");
-            Tax_From.setText("");
-            Tax_to.setText("");
-            PUC_From.setText("");
-            PUC_To.setText("");
-            Whicle_OwnerName.setText("");
-            Mobile.setText("");
-            InsuranceCompany.setText("");
+
+        if(action.equals("ADD_VEHICLE")) {
+            Log.d("resposeResult", "resposeResult: " + s);
+            JSONObject jsonObject = new JSONObject(s);
+            if (jsonObject.getString("status").equals("success")) {
+                Toast.makeText(getContext(), "Record added successfully", Toast.LENGTH_SHORT).show();
+                VehicleNumber.setText("");
+                Insurance_From_Date.setText("");
+                Insurance_To_Date.setText("");
+                Fitness_From_Date.setText("");
+                Fitness_To_Date.setText("");
+                Permit_State_FromDate.setText("");
+                Permit_State_ToDate.setText("");
+                Permit_Globel_FromDate.setText("");
+                Permit_Globel_ToDate.setText("");
+                Tax_From.setText("");
+                Tax_to.setText("");
+                PUC_From.setText("");
+                PUC_To.setText("");
+                Whicle_OwnerName.setText("");
+                Mobile.setText("");
+                InsuranceCompany.setText("");
+            }
+        }
+
+        if(action.equals("EDIT_VEHICLE")){
+            Log.d("EditresposeResult", "resposeResult: "+s);
+            JSONObject jsonObject = new JSONObject(s);
+            if(jsonObject.getString("status").equals("success")){
+                Toast.makeText(getContext(), "Updated successfully", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
