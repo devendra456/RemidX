@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.skyview.remidx.R;
 import com.skyview.remidx.SingleDriverDetails;
+import com.skyview.remidx.model_class.DataModel;
 import com.skyview.remidx.model_class.DriverModel;
 import com.skyview.remidx.network_request.RetrofitConnection;
 import com.squareup.picasso.Picasso;
@@ -33,13 +34,15 @@ import java.util.List;
 import retrofit2.Call;
 
 public class DriverListAdapter extends RecyclerView.Adapter<DriverListAdapter.MyViewHolder> implements RetrofitConnection.CallBackRetrofit {
-    public DriverListAdapter(List<DriverModel> driverModelList) {
+    public DriverListAdapter(List<DriverModel> driverModelList,OnEditClick onEditClick) {
         this.driverModelList = driverModelList;
+        this.onEditClick=onEditClick;
     }
     private RetrofitConnection connection=RetrofitConnection.getInstance();
     private List<DriverModel> driverModelList;
     int deletepos=-1;
     Context mContext;
+    OnEditClick onEditClick;
 
     @NonNull
     @NotNull
@@ -93,6 +96,10 @@ public class DriverListAdapter extends RecyclerView.Adapter<DriverListAdapter.My
             intent.putExtra("data",model);
             holder.itemView.getContext().startActivity(intent);
         });
+
+        holder.editCard.setOnClickListener(View ->{
+            onEditClick.onClicked(model);
+        });
     }
 
     private void deleteDrive(Long id, int position, Context context) {
@@ -134,5 +141,9 @@ public class DriverListAdapter extends RecyclerView.Adapter<DriverListAdapter.My
             deletCard=itemView.findViewById(R.id.cardViewdelete);
             editCard=itemView.findViewById(R.id.cardView2);
         }
+    }
+
+    public interface OnEditClick{
+        void onClicked(DriverModel dataModel);
     }
 }

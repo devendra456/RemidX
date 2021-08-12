@@ -16,7 +16,7 @@ import com.skyview.remidx.model_class.DriverModel;
 
 import java.util.List;
 
-public class DrivesList extends Fragment {
+public class DrivesList extends Fragment implements DriverListAdapter.OnEditClick {
     private List<DriverModel> driverModelList;
     private RecyclerView recyclerDriver;
 
@@ -36,7 +36,14 @@ public class DrivesList extends Fragment {
     }
 
     private void setAdapterDriverList() {
-        DriverListAdapter adapter=new DriverListAdapter(driverModelList);
+        DriverListAdapter adapter=new DriverListAdapter(driverModelList,this);
         recyclerDriver.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClicked(DriverModel dataModel) {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.driverFragement, new EdiDriversFragement(dataModel))
+                .commit();
     }
 }

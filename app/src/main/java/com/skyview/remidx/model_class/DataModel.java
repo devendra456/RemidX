@@ -1,6 +1,6 @@
 package com.skyview.remidx.model_class;
 
-public class DataModel {
+public class DataModel implements Comparable<DataModel>{
     public String getTruckNumber() {
         return truckNumber;
     }
@@ -37,4 +37,19 @@ public class DataModel {
     private String truckName;
     private String ExpiryOn;
     private String RemainDays;
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    private int day;
+
+    @Override
+    public int compareTo(DataModel dataModel) {
+        return Integer.parseInt(this.RemainDays)-Integer.parseInt(dataModel.getRemainDays());
+    }
 }

@@ -38,10 +38,10 @@ public class TruckdetailsAdpter extends RecyclerView.Adapter<TruckdetailsAdpter.
     public void onBindViewHolder(@NonNull @NotNull MyViewHolder holder, int position) {
         DataModel model=list.get(position);
         int days=Integer.parseInt(model.getRemainDays());
-        if (days<0){
+       /* if (days<0){
 
         }
-        else {
+        else {*/
             holder.truckNumber.setText(model.getTruckNumber());
             holder.leftDaysText.setText(model.getRemainDays());
             holder.expiryDate.setText(model.getExpiryOn());
@@ -55,7 +55,7 @@ public class TruckdetailsAdpter extends RecyclerView.Adapter<TruckdetailsAdpter.
                 holder.leftDaysText.setText("" + days + " Days Left");
                 holder.leftDaysText.setBackgroundResource(R.drawable.green_bg);
             }
-        }
+        //}
     }
 
 

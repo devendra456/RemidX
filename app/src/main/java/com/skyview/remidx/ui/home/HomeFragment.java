@@ -94,50 +94,54 @@ public class HomeFragment extends Fragment implements RetrofitConnection.CallBac
                 switch (tab.getPosition()){
                     case 0:
                     {
-                        Collections.sort(insurencModelList, new Comparator<DataModel>() {
+                       /* Collections.sort(insurencModelList, new Comparator<DataModel>() {
                             @Override
                             public int compare(DataModel dataModel, DataModel t1) {
-                               /* int days1=Integer.parseInt(dataModel.getRemainDays());
-                                int days2=Integer.parseInt(t1.getRemainDays());
-                                if (days1>days2){
-                                 return days2;
-                                }
-                                else {
-                                    return days1;
-                                }*/
-                                return Integer.valueOf(dataModel.getRemainDays()).compareTo(Integer.parseInt(t1.getRemainDays()));
+                                return dataModel.getRemainDays().compareTo(t1.getRemainDays());
                             }
-                        });
+                        });*/
+                        Collections.sort(insurencModelList);
                         TruckdetailsAdpter adpter=new TruckdetailsAdpter(insurencModelList);
                         recyclerView.setAdapter(adpter);
                     }
                     break;
                     case 1:
                     {
+                        /*Collections.sort(fitmitModelList, new Comparator<DataModel>() {
+                        @Override
+                        public int compare(DataModel dataModel, DataModel t1) {
+                            return dataModel.getRemainDays().compareTo(t1.getRemainDays());
+                                }
+                            });*/
+                        Collections.sort(fitmitModelList);
                         TruckdetailsAdpter adpter=new TruckdetailsAdpter(fitmitModelList);
                         recyclerView.setAdapter(adpter);
                     }
                     break;
                     case 2:
                     {
+                        Collections.sort(globlePermitModelList);
                         TruckdetailsAdpter adpter=new TruckdetailsAdpter(globlePermitModelList);
                         recyclerView.setAdapter(adpter);
                     }
                     break;
                     case 3:
                     {
+                        Collections.sort(taxModelList);
                         TruckdetailsAdpter adpter=new TruckdetailsAdpter(taxModelList);
                         recyclerView.setAdapter(adpter);
                     }
                     break;
                     case 4:
                     {
+                        Collections.sort(statePermitModelList);
                         TruckdetailsAdpter adpter=new TruckdetailsAdpter(statePermitModelList);
                         recyclerView.setAdapter(adpter);
                     }
                     break;
                     case 5:
                     {
+                        Collections.sort(poluutionModelList);
                         TruckdetailsAdpter adpter=new TruckdetailsAdpter(poluutionModelList);
                         recyclerView.setAdapter(adpter);
                     }
@@ -176,6 +180,7 @@ public class HomeFragment extends Fragment implements RetrofitConnection.CallBac
                 Type type=new TypeToken<ArrayList<DetailsModel>>(){}.getType();
                 detailsModelList=new Gson().fromJson(jsonArray.toString(), type);
                 Log.d("data", s.toString());
+                System.out.println("response "+s.toString());
                 setRemainingDays();
 
             }
@@ -205,7 +210,7 @@ public class HomeFragment extends Fragment implements RetrofitConnection.CallBac
             if (date != null) {
                 date=date.substring(0, 10);
                 String day=Daybetween(currentDate,date,"yyyy-MM-dd");
-                Log.d("dates",day);
+                Log.d("fit_day",day);
                 model.setExpiryOn(date);
                 model.setRemainDays(day);
                 model.setTruckName(detailsModelList.get(i).getWhicleOwnerName());
@@ -220,9 +225,10 @@ public class HomeFragment extends Fragment implements RetrofitConnection.CallBac
 
             date=date.substring(0, 10);
             String day=Daybetween(currentDate,date,"yyyy-MM-dd");
-            Log.d("date",day);
+            Log.d("insu_day",day);
             model.setExpiryOn(date);
             model.setRemainDays(day);
+            model.setDay(Integer.parseInt(day));
             model.setTruckName(detailsModelList.get(i).getWhicleOwnerName());
             model.setTruckNumber(detailsModelList.get(i).getWhicleNum());
             insurencModelList.add(model);
@@ -249,7 +255,7 @@ public class HomeFragment extends Fragment implements RetrofitConnection.CallBac
             if (date != null) {
                 date=date.substring(0, 10);
                 String day=Daybetween(currentDate,date,"yyyy-MM-dd");
-                Log.d("date",day);
+                Log.d("state_day",day);
                 model.setExpiryOn(date);
                 model.setRemainDays(day);
                 model.setTruckName(detailsModelList.get(i).getWhicleOwnerName());
@@ -265,7 +271,7 @@ public class HomeFragment extends Fragment implements RetrofitConnection.CallBac
             if (date1 != null) {
                 String date=(date1.toString()).substring(0, 10);
                 String day=Daybetween(currentDate,date,"yyyy-MM-dd");
-                Log.d("date",day);
+                Log.d("glob_day",day);
                 model.setExpiryOn(date);
                 model.setRemainDays(day);
                 model.setTruckName(detailsModelList.get(i).getWhicleOwnerName());
@@ -282,7 +288,7 @@ public class HomeFragment extends Fragment implements RetrofitConnection.CallBac
             if (date != null) {
                 date=date.substring(0, 10);
                 String day=Daybetween(currentDate,date,"yyyy-MM-dd");
-                Log.d("date",day);
+                Log.d("pul_day",day);
                 model.setExpiryOn(date);
                 model.setRemainDays(day);
                 model.setTruckName(detailsModelList.get(i).getWhicleOwnerName());
@@ -291,7 +297,7 @@ public class HomeFragment extends Fragment implements RetrofitConnection.CallBac
             }
 
         }
-
+        Collections.sort(insurencModelList);
         TruckdetailsAdpter adpter=new TruckdetailsAdpter(insurencModelList);
         recyclerView.setAdapter(adpter);
     }

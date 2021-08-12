@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.skyview.remidx.R;
+import com.skyview.remidx.model_class.DataModel;
+import com.skyview.remidx.model_class.DriverModel;
 import com.skyview.remidx.network_request.RetrofitConnection;
 
 import org.json.JSONException;
@@ -31,11 +33,14 @@ public class EdiDriversFragement extends Fragment implements RetrofitConnection.
     EditText edit_name,edit_mobile,edit_dob,edit_Address,edit_adharNo,edit_pan_id,edit_licence,edit_dl_validity;
     Button addButton;
     TextInputLayout dl_Validit;
+    DriverModel dataModel=null;
 
     public EdiDriversFragement() {
         // Required empty public constructor
     }
-
+    public EdiDriversFragement(DriverModel dataModel) {
+    this.dataModel=dataModel;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,6 +57,9 @@ public class EdiDriversFragement extends Fragment implements RetrofitConnection.
         addButton=v.findViewById(R.id.addButton);
         dl_Validit=v.findViewById(R.id.dl_Validit);
 
+        if(dataModel!=null){
+            setValue(v);
+        }
         addButton.setOnClickListener(View ->{
             if(isValid()){
                 addDriverData();
@@ -91,6 +99,24 @@ public class EdiDriversFragement extends Fragment implements RetrofitConnection.
             }
         });
         return v;
+    }
+
+    private void setValue(View v) {
+        if (dataModel.getDLValidUpto()!=null)
+        edit_dl_validity.setText(dataModel.getDLValidUpto() );
+        if (dataModel.getDriverName()!=null)
+            edit_name.setText(dataModel.getDriverName());
+        edit_mobile.setText("");
+        if (dataModel.getDateofbirth()!=null)
+            edit_dob.setText(dataModel.getDateofbirth());
+        if (dataModel.getAddress()!=null)
+            edit_Address.setText(dataModel.getAddress().toString());
+        if (dataModel.getAadharNo()!=null)
+            edit_adharNo.setText(dataModel.getAadharNo().toString());
+        if (dataModel.getPanId()!=null)
+            edit_pan_id.setText(dataModel.getPanId().toString());
+        if (dataModel.getDrivingLicense()!=null)
+            edit_licence.setText(dataModel.getDrivingLicense());
     }
 
     private Boolean isValid(){
