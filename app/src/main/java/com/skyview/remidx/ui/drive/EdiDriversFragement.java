@@ -34,7 +34,6 @@ public class EdiDriversFragement extends Fragment implements RetrofitConnection.
     Button addButton;
     TextInputLayout dl_Validit;
     DriverModel dataModel=null;
-
     public EdiDriversFragement() {
         // Required empty public constructor
     }
@@ -81,13 +80,15 @@ public class EdiDriversFragement extends Fragment implements RetrofitConnection.
                 pickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        String date=getDateFormate(i, i1, i2);
+                        edit_dob.setText(date);
                         Log.d("date", i+"-"+i1+"-"+i2);
                     }
                 });
             }
         });
 
-        dl_Validit.setOnClickListener(new View.OnClickListener() {
+        edit_dl_validity.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
@@ -97,11 +98,32 @@ public class EdiDriversFragement extends Fragment implements RetrofitConnection.
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                         Log.d("date2", i+"-"+i1+"-"+i2);
+                        String date=getDateFormate(i,i1,i2);
+                        edit_dl_validity.setText(date);
                     }
                 });
             }
         });
+
         return v;
+    }
+
+    private String getDateFormate(int i, int i1, int i2) {
+        String s="";
+        if(i<10){
+            s+="0"+1+"-";
+        }
+        else {
+            s+=i+"-";
+        }
+        if (i1<10){
+            s+="0"+i1+"-";
+        }
+        else {
+            s+=i1;
+        }
+        s+=i2;
+        return s;
     }
 
     private void ediDriver() {
@@ -120,12 +142,12 @@ public class EdiDriversFragement extends Fragment implements RetrofitConnection.
 
     private void setValue(View v) {
         if (dataModel.getDLValidUpto()!=null)
-        edit_dl_validity.setText(dataModel.getDLValidUpto() );
+        edit_dl_validity.setText(dataModel.getDLValidUpto().trim().substring(0,10));
         if (dataModel.getDriverName()!=null)
             edit_name.setText(dataModel.getDriverName());
         edit_mobile.setText("");
         if (dataModel.getDateofbirth()!=null)
-            edit_dob.setText(dataModel.getDateofbirth());
+            edit_dob.setText(dataModel.getDateofbirth().trim().substring(0,10));
         if (dataModel.getAddress()!=null)
             edit_Address.setText(dataModel.getAddress().toString());
         if (dataModel.getAadharNo()!=null)
@@ -134,6 +156,8 @@ public class EdiDriversFragement extends Fragment implements RetrofitConnection.
             edit_pan_id.setText(dataModel.getPanId().toString());
         if (dataModel.getDrivingLicense()!=null)
             edit_licence.setText(dataModel.getDrivingLicense());
+
+        addButton.setText("Edit Driver");
     }
 
     private Boolean isValid(){
@@ -207,6 +231,8 @@ public class EdiDriversFragement extends Fragment implements RetrofitConnection.
             if(action.equals("adddriver")){
                 JSONObject jsonObject=new JSONObject(s);
                 if (jsonObject.getString("status").equals("success")){
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.driverFragement, new DrivesList()).commit();
                     Toast.makeText(getContext(), jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -217,6 +243,8 @@ public class EdiDriversFragement extends Fragment implements RetrofitConnection.
                 JSONObject jsonObject=new JSONObject(s);
                 Log.d("editDrive", s);
                 if (jsonObject.getString("status").equals("success")){
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.driverFragement, new DrivesList()).commit();
                     Toast.makeText(getContext(), jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
                 }
                 else {

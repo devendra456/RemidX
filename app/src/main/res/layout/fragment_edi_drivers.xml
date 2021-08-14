@@ -75,6 +75,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_dob"
                     android:inputType="datetime"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:imeOptions="actionNext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -201,6 +204,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_dl_validity"
                     android:inputType="date"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:imeOptions="actionNext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

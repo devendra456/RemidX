@@ -36,6 +36,8 @@ public class DrivesList extends Fragment implements DriverListAdapter.OnEditClic
     public DrivesList(List<DriverModel> driverModelList) {
         this.driverModelList=driverModelList;
     }
+    public DrivesList() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
