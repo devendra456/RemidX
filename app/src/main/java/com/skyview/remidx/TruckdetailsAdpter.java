@@ -56,7 +56,7 @@ public class TruckdetailsAdpter extends RecyclerView.Adapter<TruckdetailsAdpter.
                 holder.leftDaysText.setTextColor(Color.argb(255,136,113,0));
             }
             else if (days<0){
-                holder.leftDaysText.setText("" + days + " Days Left");
+                holder.leftDaysText.setText("Expired");
                 holder.leftDaysText.setBackgroundResource(R.drawable.red_bg);
                 holder.leftDaysText.setTextColor(Color.argb(255,255,20,61));
             }

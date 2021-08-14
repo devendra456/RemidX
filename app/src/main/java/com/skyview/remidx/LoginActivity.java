@@ -3,6 +3,7 @@ package com.skyview.remidx;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -22,8 +23,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void gotoVerifyOtp(View view) {
-        if((username.getText().toString().equals("Ankit"))&&(password.getText().toString().equals("Ankit@123")))
+        if((username.getText().toString().trim().equals("Ankit"))&&(password.getText().toString().trim().equals("Ankit@123"))){
+            SharedPreferences.Editor editor = getSharedPreferences("UserData", MODE_PRIVATE).edit();
+            editor.putBoolean("islogin", true);
+            editor.apply();
             startActivity(new Intent(this,HomePage.class));
+        }
         else
             Toast.makeText(this, "Invalid user", Toast.LENGTH_SHORT).show();
     }
