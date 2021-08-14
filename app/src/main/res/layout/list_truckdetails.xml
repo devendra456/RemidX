@@ -2,9 +2,13 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
     app:cardCornerRadius="5dp"
-    android:layout_height="120dp">
+    android:layout_height="120dp"
+    app:cardBackgroundColor="@color/white">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,6 +31,9 @@
         android:text="UP 72 AN 2599"
         android:id="@+id/truck_Number"
         android:layout_marginTop="10dp"
+        android:textSize="17sp"
+        android:alpha="0.7"
+        android:textStyle="bold"
         android:layout_marginStart="10dp"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +44,9 @@
         android:layout_height="wrap_content"
         android:text="BL Truck"
         android:id="@+id/truckName"
+        android:textSize="16sp"
         android:layout_marginTop="10dp"
+        android:alpha="0.6"
         app:layout_constraintTop_toBottomOf="@id/truck_Number"
         app:layout_constraintStart_toStartOf="@id/truck_Number"
         android:textColor="@color/black"
@@ -48,6 +57,8 @@
         android:text="Expire on 22/07/2021"
         android:id="@+id/expiryDate"
         android:layout_marginTop="10dp"
+        android:alpha="0.5"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@id/truckName"
         app:layout_constraintTop_toBottomOf="@id/truckName"
         android:textColor="@color/black"
@@ -64,7 +75,6 @@
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/black"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

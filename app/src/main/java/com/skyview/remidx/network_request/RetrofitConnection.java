@@ -37,10 +37,10 @@ public class RetrofitConnection {
 
      public void callApiResponse(Context context, Call<String> call,CallBackRetrofit callBackRetrofit,String action){
          dialog=new ProgressBarDialog(context);
+         dialog.show();
          call.enqueue(new Callback<String>() {
              @Override
              public void onResponse(Call<String> call, Response<String> response) {
-                 dialog.show();
                  try {
                      callBackRetrofit.resposeResult(response.body(), true,action);
                  } catch (JSONException e) {

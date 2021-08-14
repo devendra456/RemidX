@@ -1,5 +1,6 @@
 package com.skyview.remidx;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,12 +48,15 @@ public class TruckdetailsAdpter extends RecyclerView.Adapter<TruckdetailsAdpter.
             holder.expiryDate.setText(model.getExpiryOn());
             if (days < 10) {
                 holder.leftDaysText.setText("" + days + " Days Left");
+                holder.leftDaysText.setTextColor(Color.argb(255,255,20,61));
                 holder.leftDaysText.setBackgroundResource(R.drawable.red_bg);
             } else if (days > 10 && days < 30) {
                 holder.leftDaysText.setText("" + days + " Days Left");
+                holder.leftDaysText.setTextColor(Color.argb(255,151,95,0));
                 holder.leftDaysText.setBackgroundResource(R.drawable.yellow_bg);
             } else {
                 holder.leftDaysText.setText("" + days + " Days Left");
+                holder.leftDaysText.setTextColor(Color.argb(255,4,129,0));
                 holder.leftDaysText.setBackgroundResource(R.drawable.green_bg);
             }
         //}
