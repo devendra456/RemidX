@@ -45,7 +45,8 @@ public class DrivesList extends Fragment implements DriverListAdapter.OnEditClic
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_drives_list, container, false);
         recyclerDriver=view.findViewById(R.id.recyclerDriver);
-        recyclerDriver.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        recyclerDriver.setLayoutManager(linearLayoutManager);
         getAllDriveList();
         return view;
     }

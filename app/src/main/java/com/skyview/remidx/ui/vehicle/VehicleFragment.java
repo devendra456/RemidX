@@ -41,6 +41,7 @@ public class VehicleFragment extends Fragment {
                     .beginTransaction()
                     .replace(R.id.vehicleDetailsFrameLayout,
                             new AddVehicleFragment()).commit();
+
         });
         vehicleListLayout.setOnClickListener(v -> {
             vehicleListLayout.setSelected(true);

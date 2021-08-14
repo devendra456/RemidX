@@ -20,13 +20,16 @@
             android:name=".HomePage"
             android:label="@string/title_activity_home_page"
             android:theme="@style/Theme.RemidX.NoActionBar">
+        </activity>
+        <activity android:name=".SplashScreen" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".SplashScreen" />
         <activity android:name=".LoginActivity" />
     </application>
 

@@ -18,6 +18,7 @@ class ProgressBarDialog {
             dialog.setCancelable(false);
             dialog.setCanceledOnTouchOutside(false);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
         }
     }
     public void hide(){

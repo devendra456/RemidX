@@ -41,6 +41,7 @@ public class RetrofitConnection {
          call.enqueue(new Callback<String>() {
              @Override
              public void onResponse(Call<String> call, Response<String> response) {
+                 dialog.hide();
                  try {
                      callBackRetrofit.resposeResult(response.body(), true,action);
                  } catch (JSONException e) {
