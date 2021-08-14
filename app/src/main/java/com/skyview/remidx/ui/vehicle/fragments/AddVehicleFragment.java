@@ -1,5 +1,6 @@
 package com.skyview.remidx.ui.vehicle.fragments;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.skyview.remidx.R;
@@ -143,6 +145,7 @@ public class AddVehicleFragment extends Fragment implements View.OnClickListener
         return view;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -160,57 +163,57 @@ public class AddVehicleFragment extends Fragment implements View.OnClickListener
                         id == R.id.Layout_PUC_From ||
                         id == R.id.Layout_PUC_To
         ) {
-            Dialog dialog = new Dialog(getContext());
-            dialog.setContentView(R.layout.calender_layout);
-            dialog.show();
-            DatePicker datePicker = dialog.findViewById(R.id.calenderView);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                datePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
-                    @Override
-                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        //String date = dayOfMonth + "-" + monthOfYear + "-" + year;
-                        String date = dayOfMonth + "-" + monthOfYear + "-" + year;
-                        switch (id) {
-                            case R.id.Layout_Insurance_From_Date:
-                                Insurance_From_Date.setText(date);
-                                break;
-                            case R.id.Layout_Insurance_To_Date:
-                                Insurance_To_Date.setText(date);
-                                break;
-                            case R.id.Layout_Fitness_From_Date:
-                                Fitness_From_Date.setText(date);
-                                break;
-                            case R.id.Layout_Fitness_To_Date:
-                                Fitness_To_Date.setText(date);
-                                break;
-                            case R.id.Layout_Permit_State_FromDate:
-                                Permit_State_FromDate.setText(date);
-                                break;
-                            case R.id.Layout_Permit_State_ToDate:
-                                Permit_State_ToDate.setText(date);
-                                break;
-                            case R.id.Layout_Permit_Globel_FromDate:
-                                Permit_Globel_FromDate.setText(date);
-                                break;
-                            case R.id.Layout_Permit_Globel_ToDate:
-                                Permit_Globel_ToDate.setText(date);
-                                break;
-                            case R.id.Layout_Tax_From:
-                                Tax_From.setText(date);
-                                break;
-                            case R.id.Layout_Tax_to:
-                                Tax_to.setText(date);
-                                break;
-                            case R.id.Layout_PUC_From:
-                                PUC_From.setText(date);
-                                break;
-                            case R.id.Layout_PUC_To:
-                                PUC_To.setText(date);
-                                break;
-                        }
-                    }
-                });
+            DatePickerDialog pickerDialog= null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                pickerDialog = new DatePickerDialog(getContext());
             }
+            pickerDialog.show();
+            pickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                    Log.d("date2", i+"-"+i1+"-"+i2);
+
+                    String date = getDateFormate(i, i1, i2);
+                    switch (id) {
+                        case R.id.Layout_Insurance_From_Date:
+                            Insurance_From_Date.setText(date);
+                            break;
+                        case R.id.Layout_Insurance_To_Date:
+                            Insurance_To_Date.setText(date);
+                            break;
+                        case R.id.Layout_Fitness_From_Date:
+                            Fitness_From_Date.setText(date);
+                            break;
+                        case R.id.Layout_Fitness_To_Date:
+                            Fitness_To_Date.setText(date);
+                            break;
+                        case R.id.Layout_Permit_State_FromDate:
+                            Permit_State_FromDate.setText(date);
+                            break;
+                        case R.id.Layout_Permit_State_ToDate:
+                            Permit_State_ToDate.setText(date);
+                            break;
+                        case R.id.Layout_Permit_Globel_FromDate:
+                            Permit_Globel_FromDate.setText(date);
+                            break;
+                        case R.id.Layout_Permit_Globel_ToDate:
+                            Permit_Globel_ToDate.setText(date);
+                            break;
+                        case R.id.Layout_Tax_From:
+                            Tax_From.setText(date);
+                            break;
+                        case R.id.Layout_Tax_to:
+                            Tax_to.setText(date);
+                            break;
+                        case R.id.Layout_PUC_From:
+                            PUC_From.setText(date);
+                            break;
+                        case R.id.Layout_PUC_To:
+                            PUC_To.setText(date);
+                            break;
+                    }
+                }
+            });
 
         }
 
@@ -320,5 +323,22 @@ public class AddVehicleFragment extends Fragment implements View.OnClickListener
                 Toast.makeText(getContext(), "Updated successfully", Toast.LENGTH_LONG).show();
             }
         }
+    }
+    private String getDateFormate(int i, int i1, int i2) {
+        String s="";
+        if(i<10){
+            s+="0"+1+"-";
+        }
+        else {
+            s+=i+"-";
+        }
+        if (i1<10){
+            s+="0"+i1+"-";
+        }
+        else {
+            s+=i1;
+        }
+        s+=i2;
+        return s;
     }
 }

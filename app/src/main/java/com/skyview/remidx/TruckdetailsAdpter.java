@@ -1,5 +1,6 @@
 package com.skyview.remidx;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,24 +39,29 @@ public class TruckdetailsAdpter extends RecyclerView.Adapter<TruckdetailsAdpter.
     public void onBindViewHolder(@NonNull @NotNull MyViewHolder holder, int position) {
         DataModel model=list.get(position);
         int days=Integer.parseInt(model.getRemainDays());
-       /* if (days<0){
-
-        }
-        else {*/
             holder.truckNumber.setText(model.getTruckNumber());
             holder.leftDaysText.setText(model.getRemainDays());
             holder.expiryDate.setText(model.getExpiryOn());
-            if (days < 10) {
+            if (days < 10 && days>=0) {
                 holder.leftDaysText.setText("" + days + " Days Left");
-                holder.leftDaysText.setBackgroundResource(R.drawable.red_bg);
+                holder.leftDaysText.setTextColor(Color.BLACK);
+                holder.leftDaysText.setBackgroundResource(R.drawable.red_bg_light);
             } else if (days > 10 && days < 30) {
                 holder.leftDaysText.setText("" + days + " Days Left");
+                holder.leftDaysText.setTextColor(Color.BLACK);
                 holder.leftDaysText.setBackgroundResource(R.drawable.yellow_bg);
-            } else {
+            }
+            else if(days<0){
+                holder.leftDaysText.setText("Expired");
+                holder.leftDaysText.setTextColor(Color.WHITE);
+                holder.leftDaysText.setBackgroundResource(R.drawable.red_bg);
+            }
+            else {
+                holder.leftDaysText.setTextColor(Color.BLACK);
                 holder.leftDaysText.setText("" + days + " Days Left");
                 holder.leftDaysText.setBackgroundResource(R.drawable.green_bg);
             }
-        //}
+
     }
 
 
