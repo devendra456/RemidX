@@ -46,6 +46,7 @@ public class TruckdetailsAdpter extends RecyclerView.Adapter<TruckdetailsAdpter.
             holder.truckNumber.setText(model.getTruckNumber());
             holder.leftDaysText.setText(model.getRemainDays());
             holder.expiryDate.setText(model.getExpiryOn());
+            holder.truckName.setText(model.getTruckName());
             if (days < 10&&days>=0) {
                 holder.leftDaysText.setText("" + days + " Days Left");
                 holder.leftDaysText.setBackgroundResource(R.drawable.red_bg);

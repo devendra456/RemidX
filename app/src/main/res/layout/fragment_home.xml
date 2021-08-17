@@ -43,7 +43,8 @@
             android:layout_below="@id/totalTruck"
             android:layout_alignParentStart="true"
             android:layout_marginStart="16dp"
-            android:text="54"
+            android:text=""
+            android:id="@+id/totalTruckNumber"
             android:textColor="@color/white"
             android:textSize="26sp" />
     </RelativeLayout>
@@ -95,6 +96,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="POLUTION" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Drivers" />
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.recyclerview.widget.RecyclerView

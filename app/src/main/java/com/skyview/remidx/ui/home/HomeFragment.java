@@ -20,6 +20,7 @@ import com.airbnb.lottie.parser.moshi.JsonReader;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.skyview.remidx.Adapters.DriverListAdapter;
 import com.skyview.remidx.R;
 import com.skyview.remidx.TruckdetailsAdpter;
 import com.skyview.remidx.databinding.FragmentHomeBinding;
@@ -28,6 +29,7 @@ import com.skyview.remidx.model_class.DetailsModel;
 import com.skyview.remidx.model_class.DriverModel;
 import com.skyview.remidx.network_request.Api;
 import com.skyview.remidx.network_request.RetrofitConnection;
+import com.skyview.remidx.ui.drive.EdiDriversFragement;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,11 +52,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class HomeFragment extends Fragment implements RetrofitConnection.CallBackRetrofit {
+public class HomeFragment extends Fragment implements RetrofitConnection.CallBackRetrofit{
 
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
     private RecyclerView recyclerView;
+    private TextView totalTruckNumber;
     private List<DetailsModel> detailsModelList;
     private List<DataModel> insurencModelList;
     private List<DataModel> taxModelList;
@@ -62,7 +65,10 @@ public class HomeFragment extends Fragment implements RetrofitConnection.CallBac
     private List<DataModel> poluutionModelList;
     private List<DataModel> globlePermitModelList;
     private List<DataModel> fitmitModelList;
+    private List<DataModel> driverListForView;
     TabLayout tablayout;
+    private List<DriverModel> driverModelList;
+    private String allDrives="AllDrivers";
     private String allData="AllVehicalDetails";
 
     int arr[]={7,10,15,20,45,300,231,8,35,12};
@@ -78,12 +84,13 @@ public class HomeFragment extends Fragment implements RetrofitConnection.CallBac
         View root = binding.getRoot();
         recyclerView=binding.recycler;
         tablayout=binding.tablayout;
+        totalTruckNumber=binding.totalTruckNumber;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // get Data from api
         Call<String> call=retrofitInstant.getApiClient().getAllData();
         retrofitInstant.callApiResponse(getContext(), call, this,allData);
-
+        getAllDriveList();
         //set data to list
 
 
@@ -146,6 +153,13 @@ public class HomeFragment extends Fragment implements RetrofitConnection.CallBac
                         recyclerView.setAdapter(adpter);
                     }
                     break;
+                    case 6:
+                    {
+                        Collections.sort(driverListForView);
+                        TruckdetailsAdpter adpter=new TruckdetailsAdpter(driverListForView);
+                        recyclerView.setAdapter(adpter);
+                    }
+                    break;
                 }
             }
 
@@ -170,22 +184,66 @@ public class HomeFragment extends Fragment implements RetrofitConnection.CallBac
     }
 
     @Override
-    public void resposeResult(String s, Boolean b,String action){
-        JSONObject jsonObject= null;
-        try {
-            jsonObject = new JSONObject(s);
-            if(jsonObject.getString("status").equals("success")){
-                JSONArray jsonArray=jsonObject.getJSONArray("data");
-                detailsModelList=new ArrayList<>();
-                Type type=new TypeToken<ArrayList<DetailsModel>>(){}.getType();
-                detailsModelList=new Gson().fromJson(jsonArray.toString(), type);
-                Log.d("data", s.toString());
-                System.out.println("response "+s.toString());
-                setRemainingDays();
+    public void resposeResult(String s, Boolean b,String action) throws JSONException {
 
+        if (action.equals(allData)) {
+
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = new JSONObject(s);
+                if (jsonObject.getString("status").equals("success")) {
+                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                    detailsModelList = new ArrayList<>();
+                    Type type = new TypeToken<ArrayList<DetailsModel>>() {
+                    }.getType();
+                    detailsModelList = new Gson().fromJson(jsonArray.toString(), type);
+                    Log.d("data", s.toString());
+                    System.out.println("response " + s.toString());
+                    setRemainingDays();
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        }
+        if (action.equals(allDrives)){
+            JSONObject jsonObject=new JSONObject(s);
+            String msg=jsonObject.getString("msg");
+            String status=jsonObject.getString("status");
+            JSONArray jsonArray=jsonObject.getJSONArray("data");
+            driverModelList=new ArrayList<>();
+            Type type=new TypeToken<ArrayList<DriverModel>>(){}.getType();
+            driverModelList.addAll(new Gson().fromJson(jsonArray.toString(), type));
+            Log.d("size", String.valueOf(driverModelList.size()));
+            //Toast.makeText(getContext(),driverModelList.size(),Toast.LENGTH_LONG).show();
+            setRemainingForDriverList();
+        }
+
+    }
+
+    private void setRemainingForDriverList(){
+        Date c = Calendar.getInstance().getTime();
+        System.out.println("Current time => " + c);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String currentDate = df.format(c);
+        Log.d("formattedDate", currentDate.toString());
+        driverListForView=new ArrayList<>();
+        for (int i=0;i<driverModelList.size();i++){
+            DataModel model=new DataModel();
+            String date=driverModelList.get(i).getDLValidUpto();
+            if (date != null) {
+                date=date.substring(0, 10);
+                String day=Daybetween(currentDate,date,"yyyy-MM-dd");
+                Log.d("pul_day",day);
+                model.setExpiryOn(date);
+                model.setRemainDays(day);
+                if (driverModelList.get(i).getDrivingLicense()!=null)
+                model.setTruckName(driverModelList.get(i).getDrivingLicense());
+                if (driverModelList.get(i).getDriverName()!=null)
+                    model.setTruckNumber(driverModelList.get(i).getDriverName());
+                driverListForView.add(model);
+            }
+
         }
 
     }
@@ -297,6 +355,7 @@ public class HomeFragment extends Fragment implements RetrofitConnection.CallBac
             }
 
         }
+        totalTruckNumber.setText(String.valueOf(detailsModelList.size()));
         Collections.sort(insurencModelList);
         TruckdetailsAdpter adpter=new TruckdetailsAdpter(insurencModelList);
         recyclerView.setAdapter(adpter);
@@ -315,4 +374,10 @@ public class HomeFragment extends Fragment implements RetrofitConnection.CallBac
         }
         return String.valueOf((Date2.getTime() - Date1.getTime())/(24*60*60*1000));
     }
+
+    private void getAllDriveList() {
+        Call call=RetrofitConnection.getInstance().getApiClient().getDrivers();
+        RetrofitConnection.getInstance().callApiResponse(getContext(), call, this, allDrives);
+    }
+
 }

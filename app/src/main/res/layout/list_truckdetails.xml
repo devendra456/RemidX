@@ -25,24 +25,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="UP 72 AN 2599"
         android:id="@+id/truck_Number"
-        android:layout_marginTop="10dp"
-        android:textSize="17sp"
-        android:alpha="0.7"
-        android:textStyle="bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:alpha="0.7"
+        android:paddingEnd="5dp"
+        android:text=""
         android:textColor="@color/black"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/remainingDay"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BL Truck"
+        android:text=""
         android:id="@+id/truckName"
         android:textSize="16sp"
         android:layout_marginTop="10dp"
@@ -51,22 +53,24 @@
         app:layout_constraintStart_toStartOf="@id/truck_Number"
         android:textColor="@color/black"
         />
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Expire on 22/07/2021"
         android:id="@+id/expiryDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:alpha="0.5"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="@id/truckName"
-        app:layout_constraintTop_toBottomOf="@id/truckName"
+        android:paddingEnd="10dp"
+        android:text=""
         android:textColor="@color/black"
-        />
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/truckImage"
+        app:layout_constraintStart_toStartOf="@id/truckName"
+        app:layout_constraintTop_toBottomOf="@id/truckName" />
     <TextView
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:text="30 Days Left"
+        android:text=""
         android:background="@drawable/green_bg"
         android:id="@+id/remainingDay"
         android:layout_marginTop="10dp"
